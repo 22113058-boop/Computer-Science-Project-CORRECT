@@ -3554,9 +3554,8 @@ class MakeBooking:
         # loops through all the users that can work (isStaff == True ) and appends them to a list
         for user in users:
             if user.isStaff == True:
-                for service in self.services_list:
-                    if service in user.services and user not in available_staff_list: 
-                        available_staff_list.append(user)
+                if self.services_list in user.services and user not in available_staff_list: 
+                    available_staff_list.append(user)
         
         Label(staff_wndw, text = "Pick a Staff Member", bg = "light blue", height = 2, width = 20).grid(column = 0, row = 0, columnspan = 2)
         Entry(staff_wndw, textvariable = self.staff_var, width = 20).grid(column = 0, row = 1, columnspan = 2)
@@ -4500,6 +4499,3 @@ if __name__ == "__main__":
 
 
 root.mainloop()
-
-
-
