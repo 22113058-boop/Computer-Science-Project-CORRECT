@@ -2255,10 +2255,7 @@ class StaffWindow:
         
         saturday_entry_end = Entry(self.view_working_hours_window, width = 10, textvariable = self.saturday_end)
         saturday_entry_end.grid(column = 4, row = 9)
-        
-        # Confirm work hours changes
-        Button(self.view_working_hours_window, text = "Confirm changes", width = 15, height = 2, command = lambda: self.staff_info_window.lift()).grid(column = 3, row = 10, padx = 5, pady = 20, columnspan = 2)
-        
+                
     def services(self, user):
         
         self.staff_role = self.role_staff_var.get()
