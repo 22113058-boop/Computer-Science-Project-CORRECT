@@ -13,6 +13,12 @@ import pickle
 
 
 
+
+
+
+
+
+
 ## Window Creation ##
 root = Tk()
 root.geometry("1000x600")
@@ -21,8 +27,16 @@ root.title("Booksly")
 
 
 
+
+
+
+
 ## underlined font ##
 underlined_font = font.Font(family = "Helvatica", size = 12, underline = True)
+
+
+
+
 
 
 
@@ -43,6 +57,10 @@ class Profile:
         self.date_created = datetime.now().strftime("%d/%m/%Y, %H:%M:")
        
         self.valid = True     
+
+
+
+
 
 
 
@@ -103,6 +121,8 @@ class User(Profile):
             return False
 
 
+
+
         # DoB
         months = {
             "01": 31,
@@ -118,6 +138,8 @@ class User(Profile):
             "11": 30,
             "12": 31
         }
+
+
 
 
         if not dob["day"].isdigit():
@@ -155,6 +177,8 @@ class User(Profile):
             window.lift()
             window.focus_force()
             return False
+
+
 
 
         dob_object = datetime(int(dob["year"]), int(dob["month"]), int(dob["day"]))
@@ -216,6 +240,8 @@ class User(Profile):
             email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
 
+
+
             if not re.match(email_pattern, email):
                 messagebox.showerror("Error", "Invalid email")
                 window.lift()
@@ -254,6 +280,10 @@ class User(Profile):
 
 
 
+
+
+
+
             if [x for x in users if x.email == email and x.staff_id != ID]:
                 messagebox.showerror("Error", "A different account already has this email")
                 window.lift()
@@ -285,11 +315,17 @@ class User(Profile):
         return True
 
 
+
+
     @classmethod
     def validate_account_info(cls, username: str, password: str, role:str, window: Frame, exists = False) -> bool:
         username = username.strip()
         password = password.strip()
         role = role.strip()
+
+
+
+
 
 
 
@@ -316,6 +352,10 @@ class User(Profile):
 
 
 
+
+
+
+
         for i in range(len(user)):
             if exists == True: break
             if username == user[i].username:
@@ -323,6 +363,8 @@ class User(Profile):
                 window.lift()
                 window.focus_force()
                 return False
+
+
 
 
         # Password # 
@@ -375,6 +417,8 @@ class User(Profile):
         
         ## work hours ##
         if role != "Admin":
+
+
 
 
             if  not any(any(hour != "" for hour in day) for day in work_hours_dict.values()):
@@ -488,7 +532,13 @@ class User(Profile):
 
 
 
+
+
+
+
 class Staff(User):
+
+
 
 
     def __init__(self, firstname, surname, dob, phone_number, email, postcode, username, staff_password, working_hours, services, notes, isAdmin = False, isStaff = False):
@@ -497,10 +547,18 @@ class Staff(User):
 
 
 
+
+
+
+
 class Admin(User):
    
     def __init__(self, firstname, surname, dob, phone_number, email, postcode, username, staff_password, working_hours, services, notes, isAdmin = False, isStaff = False):
         super().__init__(firstname, surname, dob, phone_number, email, postcode, username, staff_password, working_hours, services,notes, isAdmin, isStaff)
+
+
+
+
 
 
 
@@ -539,11 +597,17 @@ class Customer(Profile):
         surname_pattern = r"^[A-Z][a-z]{2,29}$"
 
 
+
+
         if not bool(re.match(surname_pattern, surname)):
             messagebox.showerror("Error", "Surname is incorrect")
             window.lift()
             window.focus_force()
             return False
+
+
+
+
 
 
 
@@ -563,6 +627,10 @@ class Customer(Profile):
             "11": 30,
             "12": 31
         }
+
+
+
+
 
 
 
@@ -606,6 +674,10 @@ class Customer(Profile):
 
 
 
+
+
+
+
         # Phone nomber validation
         phone_number_pattern = r"^[0-9]{8,13}$"
         
@@ -614,6 +686,10 @@ class Customer(Profile):
             window.lift()
             window.focus_force()
             return False
+
+
+
+
 
 
 
@@ -628,6 +704,10 @@ class Customer(Profile):
         
         if email == c_email:
             email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+
+
+
 
 
 
@@ -647,6 +727,8 @@ class Customer(Profile):
         # check customer accounts
         with open("customer_data.pickle","rb") as f:
             customers = pickle.load(f)
+
+
 
 
             # check for an existing customer account so no duplicate emails
@@ -703,7 +785,13 @@ class Customer(Profile):
 
 
 
+
+
+
+
 class Booking:
+
+
 
 
     booking_cntr = 1
@@ -722,6 +810,10 @@ class Booking:
         "November": {},
         "December": {}
     }
+
+
+
+
 
 
 
@@ -757,17 +849,8 @@ class Booking:
         Booking.booking_cntr += 1
 
 
-
-
-
-
 ## Windows ##
-
-
-
-
 class Log_In_Window:
-
 
     def __init__(self):
         self.log_window_frame = None
@@ -777,9 +860,10 @@ class Log_In_Window:
         self.username_var = StringVar()
         self.password_var = StringVar()
 
-
     ## Create Log In window ##
     def create_window(self):
+
+
 
 
         if self.log_window_frame: self.log_window_frame.destroy()
@@ -793,8 +877,16 @@ class Log_In_Window:
 
 
 
+
+
+
+
         log_window_password_label = Label(self.log_window_frame, bg = "light blue", height = 2, width = 10, text = "Password:", font = ("Helvatica", 18))
         log_window_password_label.place(x = 220, y = 245)
+
+
+
+
 
 
 
@@ -805,15 +897,20 @@ class Log_In_Window:
 
 
 
+
+
+
+
         self.log_window_password_entry = Entry(self.log_window_frame, textvariable = self.password_var, show = "*", font = ("Helvatica", 18))
         self.log_window_password_entry.place(x = 390, y = 260)
 
 
 
 
+
+
         self.log_window_button = Button(self.log_window_frame, text = "Log In", height = 2, width = 10, command = lambda: self.LogIn(), font = ("Helvatica", 18))
         self.log_window_button.place(x = 420, y = 330)
-
 
     # Check entries
     def LogIn(self):
@@ -823,9 +920,6 @@ class Log_In_Window:
            
         with open("user_data.pickle", "rb") as f: 
             staff = pickle.load(f)
-
-
-
 
         # Loop through staff accounts to check if an account with that username or password exists
         for account in staff:
@@ -849,8 +943,12 @@ class MainWindow:
     def __init__(self):
 
 
+
+
         self.main_window_frame = None
         self.Customer_Window_Button = None
+
+
 
 
     # Main Command Window for application
@@ -858,13 +956,9 @@ class MainWindow:
         if self.main_window_frame: self.main_window_frame.destroy()
 
 
-
-
         ## delete customer window ##
         if customer_window.customer_window_frame: customer_window.customer_window_frame.destroy()
         if customer_window.header_frame: customer_window.header_frame.destroy()
-
-
 
 
         ## delete staff frames ##
@@ -872,11 +966,13 @@ class MainWindow:
         if staff_window.header_frame: staff_window.header_frame.destroy()
 
 
-
-
         ## delete view booking window ## 
         if view_booking_window.booking_window_frame: view_booking_window.booking_window_frame.destroy() 
         if view_booking_window.header_frame: view_booking_window.header_frame.destroy()
+
+
+
+
 
 
 
@@ -888,12 +984,20 @@ class MainWindow:
 
 
 
+
+
+
+
         self.main_window_frame = Frame(root, width = 1000, height = 600, bg = "light blue")
         self.main_window_frame.place(x = 0, y = 0)
        
         # Sends user to view customers
         self.Customer_Window_Button = Button(self.main_window_frame, text = "Customer", height = 2, width = 30, command = lambda: customer_window.create_window(logged_user), font = ("Helvatica", 18))
         self.Customer_Window_Button.place(x = 100, y = 75)
+
+
+
+
 
 
 
@@ -932,6 +1036,8 @@ class CustomerWindow:
         ## ----------- ##
 
 
+
+
         self.customer_window_frame = None
         self.scroll_window_canvas = None
         self.scroll_window_frame = None
@@ -943,9 +1049,15 @@ class CustomerWindow:
 
 
 
+
+
+
+
         ## -------------------------- ##
         ## Viewing Customer Variables ##
         ## -------------------------- ##
+
+
 
 
         self.firstname_var = StringVar()
@@ -977,7 +1089,15 @@ class CustomerWindow:
 
 
 
+
+
+
+
         if main_window.main_window_frame: main_window.main_window_frame.destroy()
+
+
+
+
 
 
 
@@ -989,9 +1109,17 @@ class CustomerWindow:
 
 
 
+
+
+
+
         ## Display Customers ##
         self.header_frame = Frame(root, height = 50, bg = "light blue")
         self.header_frame.pack(fill = X)
+
+
+
+
 
 
 
@@ -1002,8 +1130,16 @@ class CustomerWindow:
 
 
 
+
+
+
+
         create_customer_button = Button(self.header_frame, text = "Create Customer", command = lambda: self.create_customer(logged_user), height = 2, width = 15)
         create_customer_button.grid(column = 1, row = 0, padx = 300)
+
+
+
+
 
 
 
@@ -1013,9 +1149,17 @@ class CustomerWindow:
 
 
 
+
+
+
+
         ## Main Area ##
         self.customer_window_frame = Frame(root, bg = "light blue")
         self.customer_window_frame.pack(fill = BOTH, expand = TRUE)
+
+
+
+
 
 
 
@@ -1037,8 +1181,16 @@ class CustomerWindow:
 
 
 
+
+
+
+
         self.scrollbar = ttk.Scrollbar(self.canvas_container, orient = VERTICAL, command = self.scroll_window_canvas.yview)
         self.scrollbar.pack(side = RIGHT, fill = Y)
+
+
+
+
 
 
 
@@ -1049,14 +1201,26 @@ class CustomerWindow:
 
 
 
+
+
+
+
         self.customer_window_frame2 = Frame(self.scroll_window_canvas, bg = "light blue")
         self.canvas_window = self.scroll_window_canvas.create_window((0,0), window = self.customer_window_frame2, anchor = "nw")
 
 
 
 
+
+
+
+
         self.customer_window_frame2.bind("<Configure>", lambda e: self.scroll_window_canvas.configure(scrollregion = self.scroll_window_canvas.bbox("all")))
         self.scroll_window_canvas.bind("<Configure>", lambda e:self.scroll_window_canvas.itemconfig(self.canvas_window, width = e.width))
+
+
+
+
 
 
 
@@ -1105,7 +1269,11 @@ class CustomerWindow:
             customers = pickle.load(f)
 
 
+
+
             ordered_customer_list = sorted(customers, key = lambda e: f"{e.firstname} {e.surname}")
+
+
 
 
         # Display each customer as a button
@@ -1117,8 +1285,9 @@ class CustomerWindow:
             create_button(customer)
             y += 50
 
-
     def open_customer(self, customer: object, logged_user: object):
+
+
 
 
         if self.customer_info_window: self.customer_info_window.destroy()
@@ -1126,6 +1295,10 @@ class CustomerWindow:
        
         self.customer_info_window = Toplevel(root, bg = "light blue")
         self.customer_info_window.geometry("400x525")
+
+
+
+
 
 
 
@@ -1143,6 +1316,10 @@ class CustomerWindow:
 
 
 
+
+
+
+
         # Firstname entry
         firstname_entry = Entry(self.customer_info_window,textvariable = self.firstname_var, width = 35)
         firstname_entry.grid(column = 1, row = 1, pady = 5, padx = 3)
@@ -1152,11 +1329,19 @@ class CustomerWindow:
 
 
 
+
+
+
+
         # Surname entry
         surname_entry = Entry(self.customer_info_window,textvariable = self.surname_var, width = 35)
         surname_entry.grid(column = 1, row = 2, pady = 5, padx = 3)
         surname_entry.delete(0, END)
         surname_entry.insert(0, customer.surname)
+
+
+
+
 
 
 
@@ -1181,11 +1366,19 @@ class CustomerWindow:
 
 
 
+
+
+
+
         # Phone number entry
         phone_number_entry = Entry(self.customer_info_window,textvariable = self.phone_number_var, width = 35)
         phone_number_entry.grid(column = 1, row = 4, pady = 5, padx = 3)
         phone_number_entry.delete(0,END)
         phone_number_entry.insert(0, customer.phone_number)
+
+
+
+
 
 
 
@@ -1199,10 +1392,16 @@ class CustomerWindow:
 
 
 
+
+
+
+
         # Date created entry
         date_created_label = Label(self.customer_info_window, textvariable = self.date_created_var, width = 30, bg = "light blue")
         date_created_label.grid(column = 1, row = 6, pady = 5, padx = 3)
         self.date_created_var.set(customer.date_created[0:len(customer.date_created)-1])
+
+
 
 
         # notes
@@ -1214,7 +1413,13 @@ class CustomerWindow:
         notes_str = "\n".join(notes_lines)
 
 
+
+
         num_lines = max(1, len(notes_lines))
+
+
+
+
 
 
 
@@ -1227,8 +1432,16 @@ class CustomerWindow:
 
 
 
+
+
+
+
         change_customer_button = Button(self.customer_info_window, command = lambda: self.confirm_changes(C_customer = customer, notes = notes_text.get("1.0", "end-1c"),logged_user = logged_user, date = [self.cb_day.get(), self.cb_month.get(), self.cb_year.get()]), height = 3, width = 15, text = "Confirm Changes")
         change_customer_button.grid(column = 1, row = 8,padx = 10, pady = 10)
+
+
+
+
 
 
 
@@ -1238,9 +1451,10 @@ class CustomerWindow:
             delete_customer_button = Button(self.customer_info_window,command = lambda: self.delete_customer(customer, logged_user), text = "Delete Customer", height = 3, width = 15)
             delete_customer_button.grid(column = 0, row = 8, padx = 10, pady = 10)
 
-
     def delete_customer(self, D_customer: object, logged_user: object):
         customers_list = []
+
+
 
 
         if not messagebox.askyesno("Confirmation", "Delete Customer account?"):
@@ -1249,8 +1463,12 @@ class CustomerWindow:
             return
 
 
+
+
         with open("customer_data.pickle", "rb") as f:
             customers = pickle.load(f)
+
+
 
 
             for customer in customers:
@@ -1261,9 +1479,13 @@ class CustomerWindow:
             pickle.dump(customers_list, f)
 
 
+
+
         # Remove bookings linked to customer
         with open("bookings.pickle", "rb") as f:
             bookings = pickle.load(f)
+
+
 
 
             for month in Booking.bookings_dict:
@@ -1278,13 +1500,23 @@ class CustomerWindow:
                         Booking.bookings_dict[month][day][slot] = updated_slot_booking
 
 
+
+
         updated_bookings = [b for b in bookings if b.customer.customer_id != D_customer.customer_id]
+
+
+
+
 
 
 
 
         with open("bookings.pickle", "wb") as f:
             pickle.dump(updated_bookings, f)
+
+
+
+
 
 
 
@@ -1296,9 +1528,15 @@ class CustomerWindow:
 
 
 
+
+
+
+
         for staff in staffs:
             for month in staff.bookings:
                 staff.bookings[month] = [b for b in staff.bookings[month]if b.customer.customer_id != D_customer.customer_id]
+
+
 
 
         with open("user_data.pickle", "wb") as f:
@@ -1314,8 +1552,12 @@ class CustomerWindow:
             customers = pickle.load(f)
 
 
+
+
             for customer in customers:
                 if customer.customer_id == C_customer.customer_id:
+
+
 
 
                     date_of_birth = {
@@ -1335,7 +1577,15 @@ class CustomerWindow:
 
 
 
+
+
+
+
                         with open("customer_data.pickle", "wb") as f: pickle.dump(customers, f)
+
+
+
+
 
 
 
@@ -1344,7 +1594,11 @@ class CustomerWindow:
                             bookings = pickle.load(f)
 
 
+
+
                             updated_bookings = []
+
+
 
 
                             for booking in bookings:
@@ -1354,7 +1608,13 @@ class CustomerWindow:
                                 updated_bookings.append(booking)
 
 
+
+
                             with open("bookings.pickle", "wb") as f: pickle.dump(updated_bookings, f)
+
+
+
+
 
 
 
@@ -1363,11 +1623,12 @@ class CustomerWindow:
                         customer_window.create_window(logged_user)
                         messagebox.showinfo("Customer Database", "Customer details have been changed")
 
-
     def search_customers(self, name: str, phone_number: str, dob_list: list):
         
         name = name.strip()
         phone_number = phone_number.strip()
+
+
 
 
         if name != "" and not name.isalpha():
@@ -1375,20 +1636,30 @@ class CustomerWindow:
             return
 
 
+
+
         if phone_number != "" and not phone_number.isdigit():
             messagebox.showerror("Search Error", "Only numbers allowed in phone")
             return
+
+
 
 
         with open("customer_data.pickle", "rb") as f:
             customers = pickle.load(f)
 
 
+
+
         results = []
+
+
 
 
         for customer in customers:
             match = True
+
+
 
 
             # Name Check
@@ -1396,6 +1667,10 @@ class CustomerWindow:
                 full_name = f"{customer.firstname} {customer.surname}".lower()
                 if name.lower() not in full_name:
                     match = False
+
+
+
+
 
 
 
@@ -1409,12 +1684,22 @@ class CustomerWindow:
 
 
 
+
+
+
+
             # Dob Check
             if dob_list != ["Day", "Month", "Year"]:
                 day, month, year = dob_list
 
 
+
+
                 dob = customer.dob  
+
+
+
+
 
 
 
@@ -1425,6 +1710,10 @@ class CustomerWindow:
                     match = False
                 if year != "Year" and int(year) != dob.year:
                     match = False
+
+
+
+
 
 
 
@@ -1457,6 +1746,10 @@ class CustomerWindow:
 
 
 
+
+
+
+
         # Customer attribute labels
         Label(self.add_customer_window, bg = "light blue", text = "Firstname:*", width = 15, height = 2).grid(column = 0, row = 0, pady = 5, padx = 3)
         Label(self.add_customer_window, bg = "light blue", text = "Surname:*", width = 15, height = 2).grid(column = 0, row = 1, pady = 5, padx = 3)
@@ -1474,10 +1767,18 @@ class CustomerWindow:
 
 
 
+
+
+
+
         # surname entry
         surname_entry = Entry(self.add_customer_window, textvariable = self.surname_cust_var, width = 35)
         surname_entry.grid(column = 1, row = 1, pady = 5, padx = 3)
         surname_entry.delete(0, END)
+
+
+
+
 
 
 
@@ -1500,10 +1801,14 @@ class CustomerWindow:
         self.cb_year.grid(row = 2, column = 1, padx = (160, 0))
 
 
+
+
         # phone number entry
         phone_number_entry = Entry(self.add_customer_window,textvariable = self.phone_number_cust_var, width = 35)
         phone_number_entry.grid(column = 1, row = 3, pady = 5, padx = 3)
         phone_number_entry.delete(0,END)
+
+
 
 
         # email entry
@@ -1517,15 +1822,21 @@ class CustomerWindow:
         confirm_email_entry.delete(0,END)
 
 
+
+
         # notes text
         notes_text = Text(self.add_customer_window, height = 8, width = 27)
         notes_text.grid(column = 1, row = 6, pady = 5, padx = 3)
+
+
 
 
         ## buttons ##
         # Add customer - triggers add_customer method
         add_customer_button = Button(self.add_customer_window, text = "Add Customer", command = lambda: self.add_customer(logged_user, notes_text.get("1.0", "end-1c"), self.add_customer_window), width = 13, height = 3)
         add_customer_button.grid(column = 1, row = 7, sticky = E)
+
+
 
 
         # Return - triggers create_window method
@@ -1539,6 +1850,8 @@ class CustomerWindow:
             "month": self.cb_month.get(),
             "year": self.cb_year.get()
         }
+
+
 
 
         customer_details = {
@@ -1555,6 +1868,10 @@ class CustomerWindow:
         if self.cb_day.get() == "Day": messagebox.showerror("Day", "Choose a Day for date of birth");add_customer_window.lift(); add_customer_window.focus_force(); return
         if self.cb_month.get() == "Month": messagebox.showerror("Month", "Choose a Month for date of birth");add_customer_window.lift(); add_customer_window.focus_force(); return
         if self.cb_year.get() == "Year": messagebox.showerror("Year", "Choose a Year for date of birth");add_customer_window.lift(); add_customer_window.focus_force(); return
+
+
+
+
 
 
 
@@ -1576,18 +1893,25 @@ class CustomerWindow:
 
 
 
+
+
+
+
             if len(customers) != 0:
                 new_customer.customer_id = customers[len(customers)-1].customer_id + 1
             
             customers.append(new_customer)
 
 
+
+
             with open("customer_data.pickle", "wb") as f: pickle.dump(customers, f)
+
+
 
 
             customer_window.create_window(logged_user, add_customer_window = add_customer_window)
             messagebox.showinfo("Customer Database", "Customer has been successfully added")
-
 
 
 
@@ -1597,6 +1921,8 @@ class StaffWindow:
         ## ----------- ##
         ## Main Frames ##
         ## ----------- ##
+
+
 
 
         self.staff_window_frame = None
@@ -1611,6 +1937,8 @@ class StaffWindow:
         self.header_frame = None
        
         self.drop_down_entry = None
+
+
 
 
         ## ----------------------- ##
@@ -1640,9 +1968,15 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## ------------------- ##
         ## Add Staff Variables ##
         ## ------------------- ##
+
+
 
 
         ## personal_info_window variables ##
@@ -1651,6 +1985,10 @@ class StaffWindow:
         self.DoB_day_staff_var = StringVar()
         self.DoB_month_staff_var = StringVar()
         self.DoB_year_staff_var = StringVar()
+
+
+
+
 
 
 
@@ -1664,10 +2002,18 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## account_info_window ##
         self.username_staff_var = StringVar()
         self.userPassword_staff_var = StringVar()
         self.role_staff_var = StringVar()
+
+
+
+
 
 
 
@@ -1716,9 +2062,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## Display Staffs ##
         self.header_frame = Frame(root, height = 50, bg = "light blue")
         self.header_frame.pack(fill = X)
+
+
+
+
 
 
 
@@ -1729,8 +2083,16 @@ class StaffWindow:
 
 
 
+
+
+
+
         create_staff_button = Button(self.header_frame, text = "Create Staff", command = lambda: self.personal_info_window(logged_user), height = 2, width = 15)
         create_staff_button.grid(column = 1, row = 0, padx = 300, )
+
+
+
+
 
 
 
@@ -1740,9 +2102,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## Main Area ##
         self.staff_window_frame = Frame(root, bg = "light blue")
         self.staff_window_frame.pack(fill = BOTH, expand = True)
+
+
+
+
 
 
 
@@ -1767,13 +2137,25 @@ class StaffWindow:
 
 
 
+
+
+
+
         self.scrollbar = ttk.Scrollbar(self.canvas_container, orient = VERTICAL, command = self.scroll_window_canvas.yview)
         self.scrollbar.pack(side = RIGHT, fill = Y)
 
 
 
 
+
+
+
+
         self.scroll_window_canvas.configure(yscrollcommand = self.scrollbar.set)
+
+
+
+
 
 
 
@@ -1834,15 +2216,25 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## Create an ordered list of staff users based on firstname and surname
         ordered_staff_list = []
+
+
 
 
         with open("user_data.pickle", "rb") as f:
             staffs = pickle.load(f)
 
 
+
+
             ordered_staff_list = sorted(staffs, key = lambda e: f"{e.firstname} {e.surname}")
+
+
 
 
         # Turn each staff into a button from the sorted list
@@ -1853,7 +2245,6 @@ class StaffWindow:
            
             create_button(staff)
             y += 50
-
 
     def open_staff(self, user: object, logged_user: object, previous_window: Frame = None):
         if self.view_working_hours_window: self.view_working_hours_window.lower()
@@ -1870,6 +2261,10 @@ class StaffWindow:
         
         self.staff_info_window = Toplevel(root, bg = "light blue")
         self.staff_info_window.geometry("400x825")
+
+
+
+
 
 
 
@@ -1894,6 +2289,10 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## ENTRIES ##
         
         # Firstname
@@ -1903,6 +2302,10 @@ class StaffWindow:
         # Surname
         surname_entry = Entry(self.staff_info_window,textvariable = self.surname_var, width = 35)
         surname_entry.grid(column = 1, row = 2, pady = 5, padx = 3)
+
+
+
+
 
 
 
@@ -1927,9 +2330,15 @@ class StaffWindow:
 
 
 
+
+
+
+
         # Phone number
         phone_number_entry = Entry(self.staff_info_window,textvariable = self.phone_number_var, width = 35)
         phone_number_entry.grid(column = 1, row = 4, pady = 5, padx = 3, columnspan = 3)
+
+
 
 
         # Email
@@ -1943,6 +2352,10 @@ class StaffWindow:
         # Username
         username_entry = Entry(self.staff_info_window,textvariable = self.username_var, width = 35)
         username_entry.grid(column = 1, row = 7, pady = 5, padx = 3, columnspan = 3)
+
+
+
+
 
 
 
@@ -1970,6 +2383,10 @@ class StaffWindow:
 
 
 
+
+
+
+
         # View staff working hours
         Button(self.staff_info_window, text = "View", width = 15, height = 2, command = lambda: self.view_working_hours()).grid(column = 1, row = 10, pady = 5, padx = 3, columnspan = 3)
         
@@ -1979,9 +2396,15 @@ class StaffWindow:
 
 
 
+
+
+
+
         # Date created
         date_created_label = Label(self.staff_info_window, textvariable = self.date_created_var, width = 30, bg = "light blue")
         date_created_label.grid(column = 1, row = 12, pady = 5, padx = 3, columnspan = 3)
+
+
 
 
         
@@ -1994,7 +2417,13 @@ class StaffWindow:
         notes_str = "\n".join(notes_lines)
 
 
+
+
         num_lines = max(1, len(notes_lines))
+
+
+
+
 
 
 
@@ -2007,9 +2436,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         # Confirm staff changes
         change_staff_button = Button(self.staff_info_window,command = lambda: self.confirm_changes(C_user = user, logged_user = logged_user, notes = notes_text.get("1.0", "end-1c")), height = 3, width = 15, text = "Confirm Changes")
         change_staff_button.grid(column = 1, row = 14,padx = 10, pady = 10, columnspan = 3)
+
+
+
+
 
 
 
@@ -2036,11 +2473,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         # - phone number -
         if self.phone_number_var.get() == "": 
             self.phone_number_var.set(user.phone_number)
         else:
             self.phone_number_var.set(self.phone_number_var.get())
+
+
 
 
         # - email - 
@@ -2062,11 +2505,15 @@ class StaffWindow:
             self.username_var.set(self.username_var.get())
 
 
+
+
         # - password - 
         if self.password_var.get() == "": 
             self.password_var.set(user.staff_password)
         else:
             self.password_var.set(self.password_var.get())
+
+
 
 
         # - Monday hours - 
@@ -2124,7 +2571,6 @@ class StaffWindow:
         else:
             self.date_created_var.set(self.date_created_var.get())
 
-
     def view_working_hours(self):
         
         # set up window
@@ -2137,8 +2583,14 @@ class StaffWindow:
             self.view_working_hours_window.lift()
 
 
+
+
         ## Labels
         Label(self.view_working_hours_window,bg = "light blue", text = "Work Information(24 hour clock)", width = 25, height = 2, font = ("Helvatica", 20)).grid(column = 0, row = 0, columnspan = 4)
+
+
+
+
 
 
 
@@ -2153,9 +2605,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         # Entries
         monday_entry_start = Entry(self.view_working_hours_window, width = 10, textvariable = self.monday_start)
         monday_entry_start.grid(column = 0, row = 3)
+
+
+
+
 
 
 
@@ -2165,6 +2625,8 @@ class StaffWindow:
         
             
         ## TUESDAY ##
+
+
 
 
         # Labels
@@ -2179,13 +2641,23 @@ class StaffWindow:
 
 
 
+
+
+
+
         tuesday_entry_end = Entry(self.view_working_hours_window, width = 10, textvariable = self.tuesday_end)
         tuesday_entry_end.grid(column = 1, row = 6)
 
 
 
 
+
+
+
+
         ## WEDNESDAY ##
+
+
 
 
         # Labels
@@ -2203,13 +2675,23 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## THURSDAY ##
+
+
 
 
         # Labels
         Label(self.view_working_hours_window,bg = "light blue", text = "Thursday", width = 15, height = 2, font = underlined_font).grid(column = 3, row = 1)
         Label(self.view_working_hours_window,bg = "light blue", text = "Start", width = 15, height = 2).grid(column = 3, row = 2)
         Label(self.view_working_hours_window,bg = "light blue", text = "End", width = 15, height = 2).grid(column = 4, row = 2)
+
+
+
+
 
 
 
@@ -2224,7 +2706,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## FRIDAY ##
+
+
 
 
         # Labels
@@ -2241,6 +2729,8 @@ class StaffWindow:
         
         
         ## SATURDAY ##
+
+
 
 
         # Labels
@@ -2272,10 +2762,18 @@ class StaffWindow:
 
 
 
+
+
+
+
         core_hair_services = ["Haircut", "Hair trim", "Wash and blow-dry", "Restyle", "Fringe trim"]
         colouring_services = ["Full hair dye", "Root touch-up", "Highlights", "Balayage", "Toner application"]
         grooming_extra_services = ["Beard trim", "Beard shaping", "Beard colouring", "Hot towel shave"]
         treatment_services = ["Deep conditioning treatment", "Hair mask treatment", "Keratin treatment"]
+
+
+
+
 
 
 
@@ -2293,7 +2791,15 @@ class StaffWindow:
 
 
 
+
+
+
+
         # Loop through each category and if service exists in staff services list turn the check button on
+
+
+
+
 
 
 
@@ -2302,6 +2808,8 @@ class StaffWindow:
         for i, treatment in enumerate(categories[0][1]):
             
             Label(self.services_window, text = categories[0][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 1, column = 0, padx = 10, pady = (0, 5))
+
+
 
 
             def create_checkbox(treatment):
@@ -2319,6 +2827,8 @@ class StaffWindow:
             Label(self.services_window, text = categories[1][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 1, column = 1, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
                 
                 cat_2_cb = Checkbutton(self.services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment, user))
@@ -2334,7 +2844,11 @@ class StaffWindow:
             Label(self.services_window, text = categories[2][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 7, column = 0, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_3_cb = Checkbutton(self.services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment, user))
@@ -2345,13 +2859,19 @@ class StaffWindow:
             create_checkbox(treatment)
 
 
+
+
         # CATEGORY 4 #
         for i, treatment in enumerate(categories[3][1]):
             
             Label(self.services_window, text = categories[3][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 7, column = 1, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_4_cb = Checkbutton(self.services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment, user))
@@ -2363,7 +2883,6 @@ class StaffWindow:
          
         Button(self.services_window, text = "Confirm",font = ("Helvatica", 18), command = lambda: self.staff_info_window.lift()).grid(column = 1, row = 13)
 
-
     def delete_staff(self, D_staff, logged_user):
        
         if not messagebox.askyesno("Confirmation", "Delete Staff account?"):
@@ -2372,14 +2891,20 @@ class StaffWindow:
             return
 
 
+
+
         staffs_list = []
         with open("user_data.pickle", "rb") as f:
             staffs = pickle.load(f)
 
 
+
+
             for staff in staffs:
                 if staff.staff_id != D_staff.staff_id:
                     staffs_list.append(staff)
+
+
 
 
                 
@@ -2409,7 +2934,6 @@ class StaffWindow:
         self.staff_info_window.destroy()
         messagebox.showinfo("Staff Database", "Staff has been successfully deleted")
         staff_window.create_window(logged_user)
-
 
     def confirm_changes(self, C_user: object, logged_user: object, notes: str):
         self.first_call = True
@@ -2467,13 +2991,21 @@ class StaffWindow:
 
 
 
+
+
+
+
         # checks notes for staff
         if not User.validate_notes_info(notes = notes, window = self.staff_info_window):
             return
 
 
+
+
         with open("user_data.pickle", "rb") as f:
             users = pickle.load(f)
+
+
 
 
             for user in users:
@@ -2505,11 +3037,14 @@ class StaffWindow:
 
 
 
+
+
+
+
         self.staff_info_window.destroy()
         self.reset_variables()
         staff_window.create_window(logged_user)
         messagebox.showinfo("Staff Database", "Staff account has been successfully updated")
-
 
     def search_staff(self, name: str, phone_number: str, dob_list: list, logged_user):
         
@@ -2529,11 +3064,19 @@ class StaffWindow:
             users = pickle.load(f)
 
 
+
+
         results = []
+
+
 
 
         for user in users:
             match = True
+
+
+
+
 
 
 
@@ -2545,10 +3088,14 @@ class StaffWindow:
                     match = False
 
 
+
+
             # Phone Check
             if phone_number != "":
                 if phone_number not in user.phone_number:
                     match = False
+
+
 
 
             # Dob Check
@@ -2556,7 +3103,11 @@ class StaffWindow:
                 day, month, year = dob_list
 
 
+
+
                 dob = user.dob
+
+
 
 
                 if day != "Day" and int(day) != dob.day:
@@ -2565,6 +3116,8 @@ class StaffWindow:
                     match = False
                 if year != "Year" and int(year) != dob.year:
                     match = False
+
+
 
 
             # Final Check
@@ -2586,10 +3139,11 @@ class StaffWindow:
         # if nothing found return
         if not results: messagebox.showinfo("Search", "No matching users found")
 
-
     def personal_info_window(self, logged_user, previous_window = None, date = ["Day", "Month", "Year"]):
        
         if previous_window: previous_window.destroy()
+
+
 
 
         # set up window
@@ -2604,9 +3158,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         Label(personal_staff_window,bg = "light blue", text = "Firstname:*", width = 15, height = 2).grid(column = 0, row = 1, pady = 5, padx = 3)
         Label(personal_staff_window,bg = "light blue", text = "Surname:*", width = 15, height = 2).grid(column = 0, row = 2, pady = 5, padx = 3)
         Label(personal_staff_window,bg = "light blue", text = "Date of Birth (DD/MM/YYYY):*", width = 25, height = 2).grid(column = 0, row = 3, pady = 5, padx = 3)
+
+
+
+
 
 
 
@@ -2624,6 +3186,10 @@ class StaffWindow:
         surname_entry_value = surname_entry.get()
         surname_entry.delete(0, END)
         surname_entry.insert(0, surname_entry_value)
+
+
+
+
 
 
 
@@ -2648,6 +3214,10 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## Buttons 
         next_section_button = Button(personal_staff_window, text = "Next Section", command = lambda: self.contact_info_window(previous_window = personal_staff_window, logged = logged_user), height = 2, width = 10)
         next_section_button.grid(column = 1, row = 4, padx = 15, sticky = E)
@@ -2664,6 +3234,8 @@ class StaffWindow:
             }
 
 
+
+
         # checks if previous data is correct(firstname, surname, date of birth)
         if not User.validate_personal_info(firstname = self.firstname_staff_var.get(), surname = self.surname_staff_var.get(), dob = self.date, window = previous_window):
             return
@@ -2676,8 +3248,14 @@ class StaffWindow:
             contact_staff_window.configure(bg = "light blue")
 
 
+
+
         ## Labels ##
         Label(contact_staff_window,bg = "light blue", text = "Contact Information", width = 15, height = 2, font = ("Helvatica", 20)).grid(column = 0, row = 0, columnspan = 2)
+
+
+
+
 
 
 
@@ -2690,7 +3268,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## Entries ##
+
+
 
 
         # email
@@ -2701,12 +3285,16 @@ class StaffWindow:
         email_entry.insert(0, email_entry_value)
 
 
+
+
         # c_email
         c_email_entry = Entry(contact_staff_window, textvariable = self.c_email_staff_var, width = 35)
         c_email_entry.grid(column = 1, row = 2, pady = 5, padx = 3)
         c_email_entry_value = c_email_entry.get()
         c_email_entry.delete(0, END)
         c_email_entry.insert(0, c_email_entry_value)
+
+
 
 
         # phone number
@@ -2717,12 +3305,16 @@ class StaffWindow:
         phone_number_entry.insert(0, phone_number_entry_value)
 
 
+
+
         # postcode
         postcode_entry = Entry(contact_staff_window, textvariable = self.postcode_staff_var, width = 35)
         postcode_entry.grid(column = 1, row = 4, pady = 5, padx = 3)
         postcode_entry_value = postcode_entry.get()
         postcode_entry.delete(0, END)
         postcode_entry.insert(0, postcode_entry_value)
+
+
 
 
         # Buttons
@@ -2732,7 +3324,6 @@ class StaffWindow:
     
         return_button = Button(contact_staff_window, text = "Go Back", command = lambda: self.personal_info_window(logged, previous_window = contact_staff_window, date = [self.date["day"], self.date["month"], self.date["year"]]), width = 10, height = 2)
         return_button.grid(column = 0, row = 5, padx = 15, sticky = E)
-
 
     def account_info_window(self, previous_window, logged):
         
@@ -2753,9 +3344,17 @@ class StaffWindow:
 
 
 
+
+
+
+
         Label(account_staff_window,bg = "light blue", text = "Username:*", width = 15, height = 2).grid(column = 0, row = 1, pady = 5, padx = 3)
         Label(account_staff_window,bg = "light blue", text = "Password:*", width = 15, height = 2).grid(column = 0, row = 2, pady = 5, padx = 3)
         Label(account_staff_window,bg = "light blue", text = "Account Level:*", width = 15, height = 2).grid(column = 0, row = 3, pady = 5, padx = 3)
+
+
+
+
 
 
 
@@ -2770,6 +3369,8 @@ class StaffWindow:
         username_entry.insert(0, username_entry_value)
 
 
+
+
         # Password
         password_entry = Entry(account_staff_window, textvariable = self.userPassword_staff_var, width = 35)
         password_entry.grid(column = 1, row = 2, pady = 5, padx = 3)
@@ -2781,6 +3382,8 @@ class StaffWindow:
         self.drop_down_entry = ttk.Combobox(account_staff_window, values = ["Admin", "Staff", "Both"], width = 30, textvariable = self.role_staff_var)
         self.drop_down_entry.set("Choose role")
         self.drop_down_entry.grid(column = 1, row = 3, padx = 3)
+
+
 
 
         # Buttons
@@ -2804,6 +3407,8 @@ class StaffWindow:
             work_info_window.configure(bg = "light blue")
 
 
+
+
         ## Labels
         Label(work_info_window,bg = "light blue", text = "Work Information(24 hour clock)", width = 25, height = 2, font = ("Helvatica", 20)).grid(column = 0, row = 0, columnspan = 4, padx = (50, 0))
         
@@ -2816,12 +3421,16 @@ class StaffWindow:
         Label(work_info_window,bg = "light blue", text = "End", width = 15, height = 2).grid(column = 1, row = 2)
 
 
+
+
         # Entries
         monday_entry_start = Entry(work_info_window, width = 10, textvariable = self.monday_start)
         monday_entry_start.grid(column = 0, row = 3)
         monday_entry_start_value = monday_entry_start.get()
         monday_entry_start.delete(0, END)
         monday_entry_start.insert(0, monday_entry_start_value)
+
+
 
 
         monday_entry_end = Entry(work_info_window, width = 10, textvariable = self.monday_end)
@@ -2833,7 +3442,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## TUESDAY ##
+
+
 
 
         # Labels
@@ -2851,6 +3466,10 @@ class StaffWindow:
 
 
 
+
+
+
+
         tuesday_entry_end = Entry(work_info_window, width = 10, textvariable = self.tuesday_end)
         tuesday_entry_end.grid(column = 1, row = 6)
         tuesday_entry_end_value = tuesday_entry_end.get()
@@ -2860,7 +3479,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## WEDNESDAY ##
+
+
 
 
         # Labels
@@ -2876,6 +3501,8 @@ class StaffWindow:
         wednesday_entry_start.insert(0, wednesday_entry_start_value)
 
 
+
+
         wednesday_entry_end = Entry(work_info_window, width = 10, textvariable = self.wednesday_end)
         wednesday_entry_end.grid(column = 1, row = 9)
         wednesday_entry_end_value = wednesday_entry_end.get()
@@ -2885,7 +3512,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## THURSDAY ##
+
+
 
 
         # Labels
@@ -2901,6 +3534,8 @@ class StaffWindow:
         thursday_entry_start.insert(0, thursday_entry_start_value)
 
 
+
+
         thursday_entry_end = Entry(work_info_window, width = 10, textvariable = self.thursday_end)
         thursday_entry_end.grid(column = 4, row = 3)
         thursday_entry_end_value = thursday_entry_end.get()
@@ -2910,7 +3545,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## FRIDAY ##
+
+
 
 
         # Labels
@@ -2926,6 +3567,8 @@ class StaffWindow:
         friday_entry_start.insert(0, friday_entry_start_value)
 
 
+
+
         friday_entry_end = Entry(work_info_window, width = 10, textvariable = self.friday_end)
         friday_entry_end.grid(column = 4, row = 6)
         friday_entry_end_value = friday_entry_end.get()
@@ -2935,7 +3578,13 @@ class StaffWindow:
 
 
 
+
+
+
+
         ## SATURDAY ##
+
+
 
 
         # Labels
@@ -2951,11 +3600,15 @@ class StaffWindow:
         saturday_entry_start.insert(0, saturday_entry_start_value)
 
 
+
+
         saturday_entry_end = Entry(work_info_window, width = 10, textvariable = self.saturday_end)
         saturday_entry_end.grid(column = 4, row = 9)
         saturday_entry_end_value = saturday_entry_end.get()
         saturday_entry_start.delete(0, END)
         saturday_entry_start.insert(0, saturday_entry_end_value)
+
+
 
 
         # Buttons
@@ -3006,6 +3659,8 @@ class StaffWindow:
         treatment_services = ["Deep conditioning treatment", "Hair mask treatment", "Keratin treatment"]
 
 
+
+
         categories = [
             ("Core Hair Services",   core_hair_services),
             ("Colouring Services",   colouring_services),
@@ -3019,14 +3674,22 @@ class StaffWindow:
 
 
 
+
+
+
+
         # Loops through each category and creates a checkbutton
         # If button was previously selected it keeps its memory
+
+
 
 
         # CATEGORY 1 #
         for i, treatment in enumerate(categories[0][1]):
             
             Label(work_services_window, text = categories[0][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 1, column = 0, padx = 10, pady = (0, 5))
+
+
 
 
             def create_checkbox(treatment):
@@ -3044,7 +3707,11 @@ class StaffWindow:
             Label(work_services_window, text = categories[1][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 1, column = 1, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_2_cb = Checkbutton(work_services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment))
@@ -3060,7 +3727,11 @@ class StaffWindow:
             Label(work_services_window, text = categories[2][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 7, column = 0, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_3_cb = Checkbutton(work_services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment))
@@ -3069,7 +3740,13 @@ class StaffWindow:
                 if treatment in self.staff_services: cat_3_cb.select()
 
 
+
+
             create_checkbox(treatment)
+
+
+
+
 
 
 
@@ -3078,6 +3755,8 @@ class StaffWindow:
         for i, treatment in enumerate(categories[3][1]):
             
             Label(work_services_window, text = categories[3][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 7, column = 1, padx = 10, pady = (0, 5))
+
+
 
 
             def create_checkbox(treatment):
@@ -3090,12 +3769,15 @@ class StaffWindow:
             create_checkbox(treatment)
 
 
+
+
         # Buttons
         Button(work_services_window, text = "Go back", font = ("Helvatica", 18), command = lambda: self.work_hours_window(work_services_window, logged)).grid(row = 13, column = 0, sticky = W, padx = (20, 0))
         Button(work_services_window, text = "Next Section", font = ("Helvatica", 18), command = lambda: self.notes_info_window(work_services_window, logged)).grid(row = 13, column = 1, sticky = W, padx = (20, 0))
 
-
     def notes_info_window(self, previous_window, logged):
+
+
 
 
         # checks previous data is correct( services )
@@ -3125,7 +3807,6 @@ class StaffWindow:
         return_button = Button(notes_window, text = "Go Back", command = lambda: self.work_services_window(logged = logged, previous_window = notes_window), width = 10, height = 2)
         return_button.grid(column = 0, row = 14, padx = 15, pady = 10, sticky = E)
 
-
     def add_staff(self, logged_user, notes, add_staff_window):
         
         #checks previous data is correct( notes )
@@ -3151,7 +3832,11 @@ class StaffWindow:
         }
 
 
+
+
         with open("user_data.pickle", "rb") as f: staffs = pickle.load(f)
+
+
 
 
         match staff_details["role"]:
@@ -3180,8 +3865,12 @@ class StaffWindow:
                         )
 
 
+
+
                 # correctly update id
                 new_staff.staff_id = staffs[len(staffs) - 1].staff_id + 1
+
+
 
 
                 staffs.append(new_staff)
@@ -3203,8 +3892,14 @@ class StaffWindow:
                     )
 
 
+
+
                 # correctly update id
                 new_staff.staff_id = staffs[len(staffs) - 1].staff_id + 1
+
+
+
+
 
 
 
@@ -3227,8 +3922,14 @@ class StaffWindow:
                         )
 
 
+
+
                 # correctly update id
                 new_staff.staff_id = staffs[len(staffs) - 1].staff_id + 1
+
+
+
+
 
 
 
@@ -3238,11 +3939,14 @@ class StaffWindow:
 
 
 
+
+
+
+
         with open("user_data.pickle", "wb") as f: pickle.dump(staffs, f)
        
         staff_window.create_window(logged_user, add_staff_window = add_staff_window)
         messagebox.showinfo("Staff", "Staff successfully added")
-
 
     def reset_variables(self):
         # reset all entries to nothing( empty )
@@ -3253,8 +3957,6 @@ class StaffWindow:
                 value.set("")
             elif isinstance(value, list):
                 setattr(self, var_name, []) 
-
-
 
 
 class MakeBooking:
@@ -3280,6 +3982,8 @@ class MakeBooking:
         ## --------------- ##
 
 
+
+
         self.staff_wndw = None
         self.services_window = None
         self.months_window = None
@@ -3291,6 +3995,8 @@ class MakeBooking:
         ## ----------------- ##
 
 
+
+
         self.making_booking = False
         self.services_list = []
         self.staff_var = StringVar()
@@ -3298,6 +4004,8 @@ class MakeBooking:
         self.timeslots_list = []
          
     def create_window(self, logged_user: object, prev_window: Frame = None):
+
+
 
 
         if prev_window: prev_window.destroy()
@@ -3308,7 +4016,15 @@ class MakeBooking:
 
 
 
+
+
+
+
         if main_window.main_window_frame: main_window.main_window_frame.destroy()
+
+
+
+
 
 
 
@@ -3320,9 +4036,17 @@ class MakeBooking:
 
 
 
+
+
+
+
         ## display customers ##
         self.header_frame = Frame(root, height = 50, bg = "light blue")
         self.header_frame.pack(fill = X)
+
+
+
+
 
 
 
@@ -3333,14 +4057,26 @@ class MakeBooking:
 
 
 
+
+
+
+
         customer_list_label = Label(self.header_frame, bg =  "light blue", text = "Choose a customer", font = ("Helvatica", 18))
         customer_list_label.grid(column = 0, row = 0)
 
 
 
 
+
+
+
+
         self.customer_window_frame = Frame(root, bg = "light blue")
         self.customer_window_frame.pack(fill = BOTH, expand = 1)
+
+
+
+
 
 
 
@@ -3355,8 +4091,16 @@ class MakeBooking:
 
 
 
+
+
+
+
         self.scrollbar = ttk.Scrollbar(self.canvas_container, orient = VERTICAL, command = self.scroll_window_canvas.yview)
         self.scrollbar.pack(side = RIGHT, fill = Y)
+
+
+
+
 
 
 
@@ -3367,12 +4111,24 @@ class MakeBooking:
 
 
 
+
+
+
+
         self.customer_window_frame2 = Frame(self.scroll_window_canvas, bg = "light blue", name = "customer holder")
 
 
 
 
+
+
+
+
         self.scroll_window_canvas.create_window((0,0), window = self.customer_window_frame2, anchor = "nw")
+
+
+
+
 
 
 
@@ -3384,7 +4140,13 @@ class MakeBooking:
             customers = pickle.load(f)
 
 
+
+
             ordered_customer_list = sorted(customers, key = lambda e: f"{e.firstname} {e.surname}")
+
+
+
+
 
 
 
@@ -3403,8 +4165,11 @@ class MakeBooking:
         if reset_variables:
             self.reset_variables()
 
+
         if prev_window: 
             prev_window.destroy()
+
+
 
 
         self.customer = customer
@@ -3417,10 +4182,18 @@ class MakeBooking:
 
 
 
+
+
+
+
         core_hair_services = ["Haircut", "Hair trim", "Wash and blow-dry", "Restyle", "Fringe trim"]
         colouring_services = ["Full hair dye", "Root touch-up", "Highlights", "Balayage", "Toner application"]
         grooming_extra_services = ["Beard trim", "Beard shaping", "Beard colouring", "Hot towel shave"]
         treatment_services = ["Deep conditioning treatment", "Hair mask treatment", "Keratin treatment"]
+
+
+
+
 
 
 
@@ -3438,10 +4211,16 @@ class MakeBooking:
 
 
 
+
+
+
+
         # CATEGORY 1 #
         for i, treatment in enumerate(categories[0][1]):
             
             Label(self.services_window, text = categories[0][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 1, column = 0, padx = 10, pady = (0, 5))
+
+
 
 
             def create_checkbox(treatment):
@@ -3459,7 +4238,11 @@ class MakeBooking:
             Label(self.services_window, text = categories[1][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 1, column = 1, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_2_cb = Checkbutton(self.services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment))
@@ -3475,7 +4258,11 @@ class MakeBooking:
             Label(self.services_window, text = categories[2][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 7, column = 0, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_3_cb = Checkbutton(self.services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment))
@@ -3484,7 +4271,11 @@ class MakeBooking:
                 if treatment in self.services_list: cat_3_cb.select()
 
 
+
+
             create_checkbox(treatment)
+
+
 
 
         # CATEGORY 4 #
@@ -3493,7 +4284,11 @@ class MakeBooking:
             Label(self.services_window, text = categories[3][0], bg = "light blue", font = ("Helvatica", 18)).grid(row = 7, column = 1, padx = 10, pady = (0, 5))
 
 
+
+
             def create_checkbox(treatment):
+
+
 
 
                 cat_4_cb = Checkbutton(self.services_window, text = treatment, bg = "light blue", command = lambda: self.change_services(treatment, ))
@@ -3570,6 +4365,8 @@ class MakeBooking:
             return
 
 
+
+
         # Creates buttons with the staff's name that can do those services one under another
         text = ""
         for i in range(len(available_staff_list)):
@@ -3588,6 +4385,8 @@ class MakeBooking:
     def choose_date(self, prev_window: Frame = None):
 
 
+
+
         if self.staff_var.get() == "":
             messagebox.showerror("Staff", "No staff have been picked for booking")
             prev_window.lift()
@@ -3595,13 +4394,21 @@ class MakeBooking:
             return
 
 
+
+
         if prev_window: prev_window.destroy()
+
+
 
 
         self.months_window = Toplevel(root)
         self.months_window.geometry("600x700")
         self.months_window.title("Booking Date")
         self.months_window.config(bg = "light blue")
+
+
+
+
 
 
 
@@ -3625,7 +4432,6 @@ class MakeBooking:
         # Ensure a calendar widget exists before proceeding
         if self.cal:
 
-
             # Convert selected date from calendar (string) into datetime object for comparisons
             self.date = datetime.strptime(self.cal.get_date(), "%m/%d/%y")
             
@@ -3646,14 +4452,8 @@ class MakeBooking:
             else: 
                 Label(self.months_window, font = ("Helvatica", 14), bg = "light blue", width = 24).grid(column = 0, row = 2)
 
-
-
-
             with open("user_data.pickle", "rb") as f: 
                 staff = pickle.load(f)
-
-
-
 
             # Match staff based on selected ID
             for user in staff:
@@ -3664,23 +4464,14 @@ class MakeBooking:
             for label in self.timeslots_list:
                 label.destroy()
 
-
-
-
             self.timeslots_list = []
             
             # check if staff works on selected day
             if self.selected_staff.working_hours[self.date.strftime("%A")][0] != "" and self.selected_staff.working_hours[self.date.strftime("%A")][1] != "":
 
-
-
-
                 # get working hours
                 start = int(self.selected_staff.working_hours[self.date.strftime("%A")][0])
                 end = int(self.selected_staff.working_hours[self.date.strftime("%A")][1])
-
-
-
 
                 # Loop through each possible hour slot
                 for hour in range(start, end):
@@ -3692,23 +4483,13 @@ class MakeBooking:
                     
                     booking_exists = True
 
-
-
-
-                    
                     # check if timeslot is already booked
                     for booking in self.selected_staff.bookings[self.date.strftime("%B")]:
-
-
-
 
                         # compare full date + hours with existing bookings
                         # if a booking exists on that day and slot do not add it to the window
                         if (int(self.date.day) == int(booking.date.day)) and (int(self.date.month) == int(booking.date.month)) and (int(self.date.year) == int(booking.date.year)) and ((int(hour)) == int(booking.slot)):
                             booking_exists = False
-
-
-
 
                     # skip slot if already booked
                     if not booking_exists: continue
@@ -3788,9 +4569,7 @@ class MakeBooking:
                         services_lines.append(", ".join(booking_dict[key][i:i+5]))
                     services_str = "\n".join(services_lines)
 
-
                     num_lines = max(1, len(services_lines))  # at least 1 row tall
-
 
                     Label(booking_details_window, text = "Services:", width = 15, relief = SOLID, font = ("Helvatica", 14), borderwidth = 1, bg = "light blue").grid(row = 5, column = 0, padx = 5, pady = 5)
                     services_text = Text(booking_details_window, height = num_lines, width = 22, relief = SOLID, bg = "light blue")
@@ -3806,7 +4585,6 @@ class MakeBooking:
         Button(booking_details_window, text = "Go Back", width = 15, command = lambda: self.additional_notes(hour, booking_details_window)).grid(row = 7, column = 1, pady = 5)
         Button(booking_details_window, text = "Confirm Booking", width = 15, font = ("Helvatica", 14), command = lambda: self.save_booking(booking_dict, booking_details_window)).grid(row = 8, column = 0, columnspan = 2, pady = 5)
 
-
     def reset_variables(self):
         
         self.services_list = []
@@ -3819,9 +4597,6 @@ class MakeBooking:
         with open("user_data.pickle", "rb") as f: users = pickle.load(f)
         with open("bookings.pickle", "rb") as f: bookings = pickle.load(f)
 
-
-
-
         working_staff = []
 
 
@@ -3829,25 +4604,25 @@ class MakeBooking:
         for user in users:
             if len(user.working_hours[self.date.strftime("%A")]) == 0: continue
 
-
-
-
             if user.working_hours[self.date.strftime("%A")][0] != "" and user.working_hours[self.date.strftime("%A")][1] != "":
-
-
-
 
                 # Check if selected booking slot falls within staff working hours
                 # chosen time slot is bigger than start of working day
                 # chosen time slot is smaller than end of working day
                 if int(new_booking_dict["Slot"]) >= int(user.working_hours[self.date.strftime("%A")][0]) and int(new_booking_dict["Slot"]) <= int(user.working_hours[self.date.strftime("%A")][1]):
                     working_staff.append(user)
+                    
+        print(working_staff)
         
         # fill dictionary with existing bookings for quick lookup
         for booking in bookings:
+            if booking.date == new_booking_dict["Date"] and booking.slot == new_booking_dict["Slot"] and booking.customer.customer_id == new_booking_dict["Customer"].customer_id:
+                messagebox.showerror("Booking Error", "A customer already has a booking on that day and time slot")
+                prev_wndw.lift()
+                prev_wndw.focus_force()
+                return
+            
             Booking.bookings_dict[booking.date.strftime("%B")][booking.date.day][booking.slot].append(booking)
-
-
 
 
         # Check if number of bookings in selected slot is less than available staff
@@ -3865,18 +4640,14 @@ class MakeBooking:
             )
 
 
-
-
             if len(bookings) != 0:
-                new_booking.booking_id = booking[len(bookings) - 1].booking_id + 1
+                new_booking.booking_id = bookings[len(bookings) - 1].booking_id + 1
             
             # add booking to dictionary for fast access
             Booking.bookings_dict[new_booking.date.strftime("%B")][new_booking.date.day][new_booking.slot].append(new_booking)
             
             # add booking to main bookings list
             bookings.append(new_booking)
-
-
 
 
             # save updated bookings list to file
@@ -3889,12 +4660,8 @@ class MakeBooking:
             return
 
 
-
-
         # add new booking to selected staff member's personal booking list
         new_booking_dict["Staff"].bookings[new_booking_dict["Date"].strftime("%B")].append(new_booking)
-
-
 
 
         # reload users and update the correct staff member's bookings
@@ -3904,14 +4671,9 @@ class MakeBooking:
                 if user.staff_id == new_booking_dict["Staff"].staff_id:
                     user.bookings = new_booking_dict["Staff"].bookings
 
-
-
-
             # save updated user data back to file
             with open("user_data.pickle", "wb") as f:
                 pickle.dump(users, f)
-
-
 
 
         # close calendar/booking window after successful booking
@@ -3922,12 +4684,8 @@ class MakeBooking:
         self.cal = None
 
 
-
-
         messagebox.showinfo("Booking", "Booking was succesfully added")
         self.create_window(self.logged_user, prev_wndw)
-
-
 
 
 class ViewBooking:
@@ -3947,14 +4705,21 @@ class ViewBooking:
         
 
 
+
+
         self.load_booking_window = None
         self.logged_user = None
-
 
     def create_window(self, logged_user: object, prev_wndw: Frame = None):
 
 
+
+
         if prev_wndw: prev_wndw.destroy()
+
+
+
+
 
 
 
@@ -3966,9 +4731,17 @@ class ViewBooking:
 
 
 
+
+
+
+
         ## reset customer window ##
         if self.header_frame: self.header_frame.destroy()
         if self.booking_window_frame: self.booking_window_frame.destroy()
+
+
+
+
 
 
 
@@ -3980,13 +4753,25 @@ class ViewBooking:
 
 
 
+
+
+
+
         back_button = Button(self.header_frame, text = "Go Back", command = lambda: main_window.create_window(self.logged_user), height = 2, width = 10)
         back_button.grid(column = 2, row = 0, padx = 650, sticky = E)
 
 
 
 
+
+
+
+
         Label(self.header_frame, bg =  "light blue", text = "Choose a Booking", font = ("Helvatica", 18)).grid(column = 0, row = 0)
+
+
+
+
 
 
 
@@ -3997,6 +4782,10 @@ class ViewBooking:
         
         self.main_content = Frame(self.booking_window_frame, bg = "light blue")
         self.main_content.pack(fill = BOTH, expand = True)
+
+
+
+
 
 
 
@@ -4017,8 +4806,16 @@ class ViewBooking:
 
 
 
+
+
+
+
         self.scrollbar = ttk.Scrollbar(self.canvas_container, orient = VERTICAL, command = self.scroll_window_canvas.yview)
         self.scrollbar.pack(side = RIGHT, fill = Y)
+
+
+
+
 
 
 
@@ -4028,8 +4825,16 @@ class ViewBooking:
 
 
 
+
+
+
+
         self.booking_window_frame2 = Frame(self.scroll_window_canvas, bg = "light blue")
         self.canvas_window = self.scroll_window_canvas.create_window((0,0), window = self.booking_window_frame2, anchor = "nw")
+
+
+
+
 
 
 
@@ -4041,6 +4846,10 @@ class ViewBooking:
         self.search_panel = Frame(self.main_content, bg = "light blue", width = 120)
         self.search_panel.grid(row = 0, column = 1, sticky = "ns")
         self.search_panel.grid_propagate(False)
+
+
+
+
 
 
 
@@ -4085,11 +4894,17 @@ class ViewBooking:
         
 
 
+
+
         Button(self.search_panel, text = "Search", font = ("Helvatica", 20), command = lambda: self.search_bookings(name = self.search_entry_name.get(), phone_number = self.search_entry_phone_number.get(), date = [self.cb_day_search.get(), self.cb_month_search.get(), self.cb_year_search.get()], show_all = self.view_past_bookings_bool.get())).pack(pady = 5, side = "bottom")
         Button(self.search_panel, text = "Reset", font = ("Helvatica", 20), command = lambda: self.create_window(self.logged_user)).pack(pady = 5, side = "bottom")
 
 
+
+
         with open("bookings.pickle", "rb") as f: bookings = pickle.load(f)
+
+
 
 
         temp_dict = {
@@ -4108,12 +4923,15 @@ class ViewBooking:
         }
 
 
+
+
         today = datetime.now().date()
+
+
 
 
         # append bookings to each month and those which are in the future
         for booking in bookings:
-
 
             booking_date = booking.date.date()
             
@@ -4133,8 +4951,12 @@ class ViewBooking:
             temp_dict[month] = sorted(temp_dict[month], key = lambda e: (e.date, e.slot))
 
 
+
+
         for month in temp_dict:
             Label(self.booking_window_frame2, bg = "light blue", text = f"{month}", font = ("Helvatica", 26), width = 20, relief = RAISED).pack(padx = 10, pady = 5)
+
+
 
 
             for booking in temp_dict[month]:
@@ -4142,7 +4964,6 @@ class ViewBooking:
                     Button(self.booking_window_frame2, command = lambda: self.load_booking(booking), text = f"{booking.customer.firstname} {booking.customer.surname}, {booking.date.strftime("%d/%m/%Y")}", width = 68, font = ("Helvatica", 18)).pack(padx = 10, pady = 5)
             
                 create_button(booking)
-
 
     def search_bookings(self, name: str, phone_number: str, date: list, show_all: int): 
         
@@ -4169,8 +4990,12 @@ class ViewBooking:
         results = []
 
 
+
+
         for booking in bookings:
             match = True
+
+
 
 
             # Name check
@@ -4184,6 +5009,8 @@ class ViewBooking:
                     match = False
 
 
+
+
             # Phone check 
             if phone_number != "":
                 if not phone_number.isdigit():
@@ -4194,12 +5021,18 @@ class ViewBooking:
                     match = False
 
 
+
+
             # Date check
             if date != ["Day", "Month", "Year"]:
                 day, month, year = date
 
 
+
+
                 booking_date = booking.date 
+
+
 
 
                 if day != "Day" and int(day) != booking_date.day:
@@ -4208,6 +5041,10 @@ class ViewBooking:
                     match = False
                 if year != "Year" and int(year) != booking_date.year:
                     match = False
+
+
+
+
 
 
 
@@ -4244,6 +5081,8 @@ class ViewBooking:
             Label(self.booking_window_frame2, bg = "light blue", text = f"{month}", font = ("Helvatica", 26), width = 20, relief = RAISED).pack(padx = 10, pady = 5)
 
 
+
+
             for booking in temp_dict[month]:
                 def create_button(booking):
                     Button(self.booking_window_frame2, command = lambda: self.load_booking(booking), text = f"{booking.customer.firstname} {booking.customer.surname}, {booking.date.strftime("%d/%m/%Y")}", width = 68, font = ("Helvatica", 18)).pack(padx = 10, pady = 5)
@@ -4262,10 +5101,7 @@ class ViewBooking:
         self.load_booking_window.config(bg = "light blue")
 
 
-
-
         Label(self.load_booking_window, bg = "light blue", font = ("Helvatica", 30), text = f"Booking ID: {booking.booking_id}").grid(column = 0, row = 0, columnspan = 2, padx = 10, pady = 10)
-
 
 
 
@@ -4273,18 +5109,12 @@ class ViewBooking:
         Label(self.load_booking_window, text = f"{booking.customer.firstname} {booking.customer.surname}", bg = "light blue", relief = SOLID, width = 25).grid(row = 1, column = 1)
 
 
-
-
         Label(self.load_booking_window, text = "Staff:", width = 10, relief = RAISED, font = ("Helvatica", 16)).grid(row = 2, column = 0, padx = 10, pady = 5)
         Label(self.load_booking_window, text = f"{booking.staff.firstname} {booking.staff.surname}", bg = "light blue", relief = SOLID, width = 25).grid(row = 2, column = 1)
 
 
-
-
         Label(self.load_booking_window, text = "Slot:", width = 10, relief = RAISED, font = ("Helvatica", 16)).grid(row = 3, column = 0, padx = 10, pady = 5)
         Label(self.load_booking_window, text = f"{booking.slot}:00 - {booking.slot + 1}:00", bg = "light blue", relief = SOLID, width = 25).grid(row = 3, column = 1)
-
-
 
 
         Label(self.load_booking_window, text = "Date:", width = 10, relief = RAISED, font = ("Helvatica", 16)).grid(row = 4, column = 0, padx = 10, pady = 5)
@@ -4307,17 +5137,12 @@ class ViewBooking:
         services_text.grid(row = 5, column = 1)
 
 
-
-
         Label(self.load_booking_window, text = "Notes:", width = 10, relief = RAISED, font = ("Helvatica", 16)).grid(row = 6, column = 0, padx = 10, pady = 5)
         Label(self.load_booking_window, text = f"{booking.notes}", bg = "light blue", relief = SOLID, width = 25).grid(row = 6, column = 1)
 
 
-
-
         Button(self.load_booking_window, text = "Go Back", width = 10, font = ("Helvatica", 16), command = lambda: self.create_window(logged_user = self.logged_user, prev_wndw = self.load_booking_window)).grid(row = 7, column = 1, pady = 20, padx = 10)
         Button(self.load_booking_window, text = "Delete Booking", width = 15, font = ("Helvatica", 16), command = lambda: self.delete_booking(booking, self.load_booking_window)).grid(row = 7, column = 0, padx = 10, pady = 20)
-
 
     def delete_booking(self, booking_to_delete: object, prev_wndw: Frame): 
         
@@ -4333,12 +5158,12 @@ class ViewBooking:
         updated_bookings = []
 
 
+
+
         for booking in bookings:
             if booking.booking_id != booking_to_delete.booking_id:
                 updated_bookings.append(booking)
 
-
-        
             for month in Booking.bookings_dict:
                 for day in Booking.bookings_dict[month]:
                     for slot in Booking.bookings_dict[month][day]:
@@ -4353,6 +5178,8 @@ class ViewBooking:
                         Booking.bookings_dict[month][day][slot] = updated_slot_booking
 
 
+
+
         # save updated bookings list
         with open("bookings.pickle", "wb") as f:
             pickle.dump(updated_bookings, f)
@@ -4361,24 +5188,21 @@ class ViewBooking:
         updated_staff_bookings = []
 
 
+
+
         # delete booking from staff
         for booking in booking_to_delete.staff.bookings[booking_to_delete.date.strftime("%B")]:
             if booking.booking_id != booking_to_delete.booking_id:
                 updated_staff_bookings.append(booking)
 
-
-
-
         # update user data
         with open("user_data.pickle","rb") as f:
             users = pickle.load(f)
-
 
             for user in users:
                 
                 # find correct staff member
                 if user.staff_id == booking_to_delete.staff.staff_id:
-
 
                     # update their bookings for that month
                     user.bookings[booking_to_delete.date.strftime("%B")] = updated_staff_bookings
@@ -4397,9 +5221,6 @@ class ViewBooking:
         # return to main window
         self.create_window(self.logged_user, prev_wndw)
         messagebox.showinfo("Booking File", "Booking was succesfully deleted")
-
-
-
 
 
 
@@ -4422,7 +5243,6 @@ if __name__ == "__main__":
             "Friday": [8, 18],
             "Saturday": [8, 18]
         }
-
 
     admin = Admin(
             firstname = "Kristiyan", 
@@ -4455,11 +5275,7 @@ if __name__ == "__main__":
     )
 
 
-
-
     users = [admin, staff]
-
-
     
     with open("user_data.pickle", "rb") as f: 
         try:
@@ -4475,32 +5291,21 @@ if __name__ == "__main__":
     log_in_window.create_window()
 
 
-
-
     main_window = MainWindow()
    
    
     customer_window = CustomerWindow()
 
 
-
-
     staff_window = StaffWindow()
-
 
 
 
     booking_window = MakeBooking()
 
 
-
-
     view_booking_window = ViewBooking()
 
 
 
-
 root.mainloop()
-
-
-
