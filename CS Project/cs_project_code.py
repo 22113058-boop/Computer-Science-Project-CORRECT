@@ -9,14 +9,36 @@ import re
 import pickle
 
 
+
+
+
+
+
+
+
+
+
+
 ## Window Creation ##
 root = Tk()
 root.geometry("1000x600")
 root.title("Booksly")
 
 
+
+
+
+
+
+
 ## underlined font ##
 underlined_font = font.Font(family = "Helvatica", size = 12, underline = True)
+
+
+
+
+
+
 
 
 ## Creating Classes ##
@@ -216,7 +238,7 @@ class User(Profile):
                 window.focus_force()
                 return False
         else:
-            messagebox.showerror("Error", "Invalid email")
+            messagebox.showerror("Error", "Emails do not match")
             window.lift()
             window.focus_force()
             return False
@@ -244,13 +266,6 @@ class User(Profile):
         # check customer accounts
         with open("user_data.pickle","rb") as f:
             users = pickle.load(f)
-
-
-
-
-
-
-
 
             if [x for x in users if x.email == email and x.staff_id != ID]:
                 messagebox.showerror("Error", "A different account already has this email")
@@ -509,12 +524,6 @@ class Staff(User):
 
     def __init__(self, firstname, surname, dob, phone_number, email, postcode, username, staff_password, working_hours, services, notes, isAdmin = False, isStaff = False):
         super().__init__( firstname, surname, dob, phone_number, email, postcode, username, staff_password, working_hours, services, notes, isAdmin, isStaff)
-
-
-
-
-
-
 
 
 class Admin(User):
@@ -1834,8 +1843,6 @@ class StaffWindow:
         ## ----------- ##
 
 
-
-
         self.staff_window_frame = None
         self.scroll_window_canvas = None
         self.canvas_window = None
@@ -1848,7 +1855,6 @@ class StaffWindow:
         self.header_frame = None
        
         self.drop_down_entry = None
-
 
 
 
@@ -1875,33 +1881,15 @@ class StaffWindow:
         self.date_created_var = StringVar()
         self.notes_var = ""
        
-
-
-
-
-
-
-
-
+       
         ## ------------------- ##
         ## Add Staff Variables ##
         ## ------------------- ##
 
-
-
-
         ## personal_info_window variables ##
         self.firstname_staff_var = StringVar()
         self.surname_staff_var = StringVar()
-        self.DoB_day_staff_var = StringVar()
-        self.DoB_month_staff_var = StringVar()
-        self.DoB_year_staff_var = StringVar()
-
-
-
-
-
-
+        self.date = None
 
 
         ## contact_info_window ##
@@ -1911,22 +1899,10 @@ class StaffWindow:
         self.postcode_staff_var = StringVar()
 
 
-
-
-
-
-
-
         ## account_info_window ##
         self.username_staff_var = StringVar()
         self.userPassword_staff_var = StringVar()
         self.role_staff_var = StringVar()
-
-
-
-
-
-
 
 
         ## work_hours_window ##
@@ -3041,9 +3017,6 @@ class StaffWindow:
        
         if previous_window: previous_window.destroy()
 
-
-
-
         # set up window
         personal_staff_window = Toplevel(root)
         personal_staff_window.geometry("415x275")
@@ -3054,21 +3027,9 @@ class StaffWindow:
         Label(personal_staff_window,bg = "light blue", text = "Personal Information", width = 20, height = 2, font = ("Helvatica", 20)).grid(column = 0, row = 0, columnspan = 4)
 
 
-
-
-
-
-
-
         Label(personal_staff_window,bg = "light blue", text = "Firstname:*", width = 15, height = 2).grid(column = 0, row = 1, pady = 5, padx = 3)
         Label(personal_staff_window,bg = "light blue", text = "Surname:*", width = 15, height = 2).grid(column = 0, row = 2, pady = 5, padx = 3)
         Label(personal_staff_window,bg = "light blue", text = "Date of Birth (DD/MM/YYYY):*", width = 25, height = 2).grid(column = 0, row = 3, pady = 5, padx = 3)
-
-
-
-
-
-
 
 
         # firstname
@@ -3125,15 +3086,11 @@ class StaffWindow:
        
     def contact_info_window(self, previous_window, logged):
         
-        self.date = {
-            "day": self.cb_day.get(),
-            "month": self.cb_month.get(),
-            "year": self.cb_year.get()
-            }
-
-
-
-
+        self.date = {"day": self.cb_day.get(),
+                     "month": self.cb_month.get(),
+                     "year": self.cb_year.get()
+                    } if self.date == None else self.date
+        
         # checks if previous data is correct(firstname, surname, date of birth)
         if not User.validate_personal_info(firstname = self.firstname_staff_var.get(), surname = self.surname_staff_var.get(), dob = self.date, window = previous_window):
             return
@@ -3144,9 +3101,6 @@ class StaffWindow:
             contact_staff_window.geometry("375x315")
             contact_staff_window.title("Contact Information")
             contact_staff_window.configure(bg = "light blue")
-
-
-
 
         ## Labels ##
         Label(contact_staff_window,bg = "light blue", text = "Contact Information", width = 15, height = 2, font = ("Helvatica", 20)).grid(column = 0, row = 0, columnspan = 2)
@@ -3239,23 +3193,9 @@ class StaffWindow:
         ## Labels
         Label(account_staff_window,bg = "light blue", text = "Account Information", width = 20, height = 2, font = ("Helvatica", 20)).grid(column = 0, row = 0, columnspan = 2)
 
-
-
-
-
-
-
-
         Label(account_staff_window,bg = "light blue", text = "Username:*", width = 15, height = 2).grid(column = 0, row = 1, pady = 5, padx = 3)
         Label(account_staff_window,bg = "light blue", text = "Password:*", width = 15, height = 2).grid(column = 0, row = 2, pady = 5, padx = 3)
         Label(account_staff_window,bg = "light blue", text = "Account Level:*", width = 15, height = 2).grid(column = 0, row = 3, pady = 5, padx = 3)
-
-
-
-
-
-
-
 
         ## Entries ##
         
@@ -3265,9 +3205,6 @@ class StaffWindow:
         username_entry_value = username_entry.get()
         username_entry.delete(0, END)
         username_entry.insert(0, username_entry_value)
-
-
-
 
         # Password
         password_entry = Entry(account_staff_window, textvariable = self.userPassword_staff_var, width = 35)
@@ -3280,8 +3217,6 @@ class StaffWindow:
         self.drop_down_entry = ttk.Combobox(account_staff_window, values = ["Admin", "Staff", "Both"], width = 30, textvariable = self.role_staff_var)
         self.drop_down_entry.set("Choose role")
         self.drop_down_entry.grid(column = 1, row = 3, padx = 3)
-
-
 
 
         # Buttons
