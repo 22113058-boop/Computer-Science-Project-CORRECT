@@ -9,36 +9,14 @@ import re
 import pickle
 
 
-
-
-
-
-
-
-
-
-
-
 ## Window Creation ##
 root = Tk()
 root.geometry("1000x600")
 root.title("Booksly")
 
 
-
-
-
-
-
-
 ## underlined font ##
 underlined_font = font.Font(family = "Helvatica", size = 12, underline = True)
-
-
-
-
-
-
 
 
 ## Creating Classes ##
