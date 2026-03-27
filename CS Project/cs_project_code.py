@@ -9,36 +9,14 @@ import re
 import pickle
 
 
-
-
-
-
-
-
-
-
-
-
 ## Window Creation ##
 root = Tk()
 root.geometry("1000x600")
 root.title("Booksly")
 
 
-
-
-
-
-
-
 ## underlined font ##
 underlined_font = font.Font(family = "Helvatica", size = 12, underline = True)
-
-
-
-
-
-
 
 
 ## Creating Classes ##
@@ -3086,10 +3064,11 @@ class StaffWindow:
        
     def contact_info_window(self, previous_window, logged):
         
-        self.date = {"day": self.cb_day.get(),
-                     "month": self.cb_month.get(),
-                     "year": self.cb_year.get()
-                    } if self.date == None else self.date
+        if previous_window.title() == "Personal Information":
+            self.date = {"day": self.cb_day.get(),
+                        "month": self.cb_month.get(),
+                        "year": self.cb_year.get()
+                        }
         
         # checks if previous data is correct(firstname, surname, date of birth)
         if not User.validate_personal_info(firstname = self.firstname_staff_var.get(), surname = self.surname_staff_var.get(), dob = self.date, window = previous_window):
