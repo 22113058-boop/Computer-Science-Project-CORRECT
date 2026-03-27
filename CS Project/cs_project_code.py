@@ -9,36 +9,14 @@ import re
 import pickle
 
 
-
-
-
-
-
-
-
-
-
-
 ## Window Creation ##
 root = Tk()
 root.geometry("1000x600")
 root.title("Booksly")
 
 
-
-
-
-
-
-
 ## underlined font ##
 underlined_font = font.Font(family = "Helvatica", size = 12, underline = True)
-
-
-
-
-
-
 
 
 ## Creating Classes ##
@@ -57,11 +35,6 @@ class Profile:
         self.date_created = datetime.now().strftime("%d/%m/%Y, %H:%M:")
        
         self.valid = True     
-
-
-
-
-
 
 
 
@@ -121,8 +94,6 @@ class User(Profile):
             return False
 
 
-
-
         # DoB
         months = {
             "01": 31,
@@ -138,8 +109,6 @@ class User(Profile):
             "11": 30,
             "12": 31
         }
-
-
 
 
         if not dob["day"].isdigit():
@@ -177,8 +146,6 @@ class User(Profile):
             window.lift()
             window.focus_force()
             return False
-
-
 
 
         dob_object = datetime(int(dob["year"]), int(dob["month"]), int(dob["day"]))
