@@ -9,14 +9,36 @@ import re
 import pickle
 
 
+
+
+
+
+
+
+
+
+
+
 ## Window Creation ##
 root = Tk()
 root.geometry("1000x600")
 root.title("Booksly")
 
 
+
+
+
+
+
+
 ## underlined font ##
 underlined_font = font.Font(family = "Helvatica", size = 12, underline = True)
+
+
+
+
+
+
 
 
 ## Creating Classes ##
@@ -35,7 +57,6 @@ class Profile:
         self.date_created = datetime.now().strftime("%d/%m/%Y, %H:%M:")
        
         self.valid = True     
-
 
 
 class User(Profile):
@@ -111,6 +132,8 @@ class User(Profile):
         }
 
 
+
+
         if not dob["day"].isdigit():
             messagebox.showerror("Error", "Invalid Day")
             window.lift()
@@ -146,6 +169,8 @@ class User(Profile):
             window.lift()
             window.focus_force()
             return False
+
+
 
 
         dob_object = datetime(int(dob["year"]), int(dob["month"]), int(dob["day"]))
@@ -205,8 +230,6 @@ class User(Profile):
         
         if email == c_email:
             email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-
-
 
 
             if not re.match(email_pattern, email):
@@ -280,8 +303,6 @@ class User(Profile):
                 return False
                     
         return True
-
-
 
 
     @classmethod
@@ -524,12 +545,6 @@ class Admin(User):
         super().__init__(firstname, surname, dob, phone_number, email, postcode, username, staff_password, working_hours, services,notes, isAdmin, isStaff)
 
 
-
-
-
-
-
-
 class Customer(Profile):
    
     customer_cntr = 1
@@ -564,20 +579,11 @@ class Customer(Profile):
         surname_pattern = r"^[A-Z][a-z]{2,29}$"
 
 
-
-
         if not bool(re.match(surname_pattern, surname)):
             messagebox.showerror("Error", "Surname is incorrect")
             window.lift()
             window.focus_force()
             return False
-
-
-
-
-
-
-
 
         # Date of Birth validaiton
         months = {
@@ -594,12 +600,6 @@ class Customer(Profile):
             "11": 30,
             "12": 31
         }
-
-
-
-
-
-
 
 
         if not dob["day"].isdigit():
@@ -639,12 +639,6 @@ class Customer(Profile):
             return False
 
 
-
-
-
-
-
-
         # Phone nomber validation
         phone_number_pattern = r"^[0-9]{8,13}$"
         
@@ -653,12 +647,6 @@ class Customer(Profile):
             window.lift()
             window.focus_force()
             return False
-
-
-
-
-
-
 
 
         # Email Validation
@@ -672,20 +660,13 @@ class Customer(Profile):
         if email == c_email:
             email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
-
-
-
-
-
-
-
             if not re.match(email_pattern, email):
                 messagebox.showerror("Error", "Invalid email")
                 window.lift()
                 window.focus_force()
                 return False
         else:
-            messagebox.showerror("Error", "Invalid email")
+            messagebox.showerror("Error", "Emails do not match")
             window.lift()
             window.focus_force()
             return False
@@ -750,16 +731,7 @@ class Customer(Profile):
         return True
 
 
-
-
-
-
-
-
 class Booking:
-
-
-
 
     booking_cntr = 1
     
@@ -777,12 +749,6 @@ class Booking:
         "November": {},
         "December": {}
     }
-
-
-
-
-
-
 
 
     for key in bookings_dict:
@@ -2955,26 +2921,13 @@ class StaffWindow:
         if not User.validate_work_services(services = self.view_services, role = self.role_staff_var.get(), window = self.staff_info_window):
             return
 
-
-
-
-
-
-
-
         # checks notes for staff
         if not User.validate_notes_info(notes = notes, window = self.staff_info_window):
             return
 
-
-
-
         with open("user_data.pickle", "rb") as f:
             users = pickle.load(f)
-
-
-
-
+            
             for user in users:
                 if user.staff_id == C_user.staff_id:
                     user.firstname = self.firstname_var.get().strip()
@@ -2982,7 +2935,7 @@ class StaffWindow:
                     user.dob = datetime(int(date["year"]), int(date["month"]), int(date["day"]))
                     user.phone_number = self.phone_number_var.get().strip()
                     user.email = self.email_var.get().strip()
-                    user.postcode = self.postcode_var.get().strip()
+                    user.postcode = self.postcode_var.get().strip().upper()
                     user.username = self.username_var.get().strip()
                     user.staff_password = self.password_var.get().strip()
                     user.working_hours = self.work_hours_dict
@@ -3781,7 +3734,7 @@ class StaffWindow:
             self.notes_info_window(previous_window = None, logged = logged_user)
             return
             
-        
+
         staff_details = {
             "firstname": self.firstname_staff_var.get().strip(),
             "surname" : self.surname_staff_var.get().strip(),
@@ -3789,7 +3742,7 @@ class StaffWindow:
             "phone_number": self.phone_number_staff_var.get().strip(),
             "email": self.email_staff_var.get().strip(),
             "c_email": self.c_email_staff_var.get().strip(),
-            "postcode": self.postcode_staff_var.get().strip(),
+            "postcode": self.postcode_staff_var.get().strip().upper(),
             "username": self.username_staff_var.get().strip(),
             "password": self.userPassword_staff_var.get().strip(),
             "role": self.role_staff_var.get().strip(),
@@ -3797,8 +3750,6 @@ class StaffWindow:
             "services": self.staff_services,
             "notes": notes.strip()
         }
-
-
 
 
         with open("user_data.pickle", "rb") as f: staffs = pickle.load(f)
@@ -5243,6 +5194,7 @@ if __name__ == "__main__":
 
 
     users = [admin, staff]
+    
     
     with open("user_data.pickle", "rb") as f: 
         try:
